@@ -1,0 +1,16 @@
+#######################################################################################################################
+
+# path where Git repositories will be cloned
+markdownFolder="./wiki-markdown"
+
+# path where Git markdown will be converted into HTML
+htmlFolder="./wiki-html"
+
+# text file containing all the Git repositories to convert,
+# one repository per line (see gitList.txt example)
+gitList="./gitList.txt"
+
+# the Git branch which the converter has to point to
+gitBranch="master"
+
+########################################################################################################################
