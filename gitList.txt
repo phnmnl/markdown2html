@@ -1,0 +1,3 @@
+https://github.com/phnmnl/container-rnmr.git
+https://github.com/phnmnl/container-univariate.git
+https://github.com/phnmnl/container-multivariate.git
