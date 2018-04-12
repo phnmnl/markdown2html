@@ -73,8 +73,8 @@ trap on_interrupt INT TERM
 trap on_exit EXIT
 
 # base paths
-current_path="$( cd "$(dirname "${0}")" ; pwd -P )"
-converter="${current_path}/convert.sh"
+script_path="$( cd "$(dirname "${0}")" ; pwd -P )"
+converter="${script_path}/convert.sh"
 
 if [[ ! -x "${converter}" ]]; then
     log "ERROR! Either the converter script ${converter} isn't present or it's not executable"
@@ -88,17 +88,9 @@ markdownFolder="$base_path/wiki-markdown"
 gitList="${base_path}/gitList.txt"
 gitBranch="master"
 
-# use the configuration file if provided
-if [[ "$#" -gt 0 ]]; then
-    config_file="${1}"
-    if [[ -n "${config_file}" ]]; then
-        if [[ ! -f ${config_file} ]]; then
-            log "'${config_file}' is not a valid configuration file !!!"
-        fi
-        log "Using configuration file: ${config_file}"
-        source "${config_file}"
-    fi
-fi
+# parse arguments and initialize configuration
+source ${script_path}/argparse.sh
+
 # set directories to host new files
 timestamp="$(date +%s)"
 newHtmlFolder="${htmlFolder}-${timestamp}"
@@ -121,7 +113,7 @@ if [[ -L "${markdownFolder}" ]]; then
 fi
 
 # print path info
-log "\nScript path: ${current_path}" \
+log "\nScript path: ${script_path}" \
     "\nTarget base path: ${base_path}" \
     "\nHtml Folder [New]: ${newHtmlFolder}" \
     "\nHtml Folder [Old]: ${oldHtmlFolder}" \
